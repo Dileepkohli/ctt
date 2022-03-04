@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import React from 'react'
 
 const signin=()=> {
-    const paperStyle={padding:10,height:'80vh',width:250,margin:'20px auto'}
+  const paperStyle={padding:10,height:'80vh',width:250,margin:'20px auto'}
   return (
       <Grid >
           <Paper elevation={20} style={paperStyle}>
