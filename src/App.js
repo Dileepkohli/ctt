@@ -1,13 +1,22 @@
-import React from 'react';
-import Signup from './Components/signup';
-import Signin from './Components/signin';
-
+import './App.css';
+import { useState } from 'react';
+import SignUp from './Components/SignUp';
 
 function App() {
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignIn, setIsSignIn] = useState(false);
+
+  const signUpHandler = () => {
+    setIsSignUp(true);
+  };
+  const signUpDone = () => {
+    setIsSignUp(false);
+  };
   return (
     <div className="App">
-      <Signup/>
-      <Signin/>
+      <header className="App-header">
+        <SignUp signUpDone={signUpDone}/>
+      </header>
     </div>
   );
 }
