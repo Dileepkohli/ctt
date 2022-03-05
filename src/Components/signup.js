@@ -25,7 +25,6 @@ const SignUp = (props) => {
 
         onSubmit: values => {
             //console.log("Fprmik submit called", values);
-            props.signUpDone();
             if (formik.values.email && formik.values.password && !formik.values.vcode) {
                 UserPool.signUp(formik.values.email, formik.values.password, null, [], (err, data) => {
                     if (err) {
@@ -50,8 +49,10 @@ const SignUp = (props) => {
                     if (err) {
                         alert(err.message || JSON.stringify(err));
                         return;
+                    }else{
+                        console.log('call result: ' + result);
+                        props.signUpDone();
                     }
-                    console.log('call result: ' + result);
                 });
             }
         }

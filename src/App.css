@@ -40,3 +40,58 @@
     transform: rotate(360deg);
   }
 }
+.signout-button {
+  position: relative;
+  border-radius: 30px;
+  border-color: #FFFFFF;
+  transition: all 0.5s;
+  cursor: pointer;
+  color: #FFFFFF;
+  height: 30px;
+  width: 150px;
+  background-image: linear-gradient(to bottom right, rgb(120, 37, 122), rgb(204, 124, 20));
+}
+
+.button {
+  position: relative;
+  background-color: #04AA6D;
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button:after {
+  content: "";
+  background: #112a6d;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.signout-div {
+  position: fixed;
+  left: 90%;
+  top: 1%;
+  opacity: 0.8;
+}
