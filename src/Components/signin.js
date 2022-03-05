@@ -1,47 +1,53 @@
-import { Avatar, Grid,  Paper, TextField, Typography, Link } from '@material-ui/core'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Button from '@material-ui/core/Button';
+import './SignUp.css';
+import { useFormik } from 'formik';
+import React, { useState, useContext } from 'react';
+import { AccountContext } from './Account';
 
+const SignIn = (props) => {
+    const { authenticate } = useContext(AccountContext);
+    const formik = useFormik({
+        initialValues: {
+            email:'',
+            password:''
+        },
 
+        onSubmit: values => {
+            console.log("Fprmik submit called", values);
+            authenticate(formik.values.email, formik.values.password)
+            .then(data => {
+                console.log("Signed In : ", data);
+                props.signInDone();
+            })
+            .catch(err => {
+                console.log("Failed to Sign in : ", err);
+            });
+        }
+    });
 
+    const signUpHandler = () => {
+        props.signUpHandler();
+    };
+    return (
+        <div className='signUpBox'>
+            <h2>Sign In</h2>
+            <div className='absoluteForm'>
+                <form onSubmit={formik.handleSubmit}>
+                    <div className='relativeLabel'><label htmlFor="email">Email</label></div>
+                    <div className='relativeInput'><input id='email' 
+                                                        name='email' 
+                                                        onChange={formik.handleChange}
+                                                        value={formik.values.email}></input></div>
+                    <div className='relativeLabel'><label htmlFor="password">Password</label></div>
+                    <div className='relativeInput'><input id='password' 
+                                                            name='password'
+                                                            type='password'  
+                                                            onChange={formik.handleChange}
+                                                            value={formik.values.password}></input></div>
+                    <div className='relativeInput'><button type='submit'>Sign In</button> <button onClick={signUpHandler}>Sign Up</button></div>
+                </form>
+            </div>
+        </div>
+    );
+};
 
-import React from 'react'
-
-const signin=()=> {
-  const paperStyle={padding:10,height:'80vh',width:250,margin:'20px auto'}
-  return (
-      <Grid >
-          <Paper elevation={20} style={paperStyle}>
-              <Grid align='center'>
-              <Avatar><AccountCircleIcon/></Avatar>
-              <h2>Sign In</h2>
-              </Grid>
-                  <TextField label='Email' placeholder='Enter your email' fullWidth required/>
-                  <FormControlLabel 
-                        control={
-                        <Checkbox
-                            name="checkedB"
-                            color="primary"
-                        />
-                        }
-                        label="Remember me"
-                    />
-                    <Button variant="contained" color="primary" fullWidth>Submit </Button>
-                       <Typography>
-                          <Link href='0' >
-                          Forgot Password
-                          </Link>
-                       </Typography>
-                       <Typography>Do you have an account
-                          <Link href='0' >
-                          Sign up?
-                          </Link>
-                       </Typography>
-          </Paper>
-      </Grid>
-  )
-}
-
-export default signin
+export default SignIn;
