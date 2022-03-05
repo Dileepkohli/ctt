@@ -9,8 +9,8 @@ var CognitoUserPool = AmazonCognitoIdentity.CognitoUserPool;
 const SignUp = (props) => {
     //console.log("Just for testing");
     const poolData ={
-        UserPoolId:"ap-south-1_DYsDFJktX",
-        ClientId: "7rd1a2ta018t8jcccakq8b211e"
+        UserPoolId:"",
+        ClientId: ""
     };
     const [isSignUpTriggered, setIsSignUpTriggered] = useState(true);
     const [isSignUpDone, setIsSignUpDone] = useState(false);
@@ -57,6 +57,9 @@ const SignUp = (props) => {
             }
         }
     });
+    const signInHandler = () => {
+        props.signInHandler();
+    }
     return (
         <div className='signUpBox'>
             <h2>Sign Up</h2>
@@ -82,7 +85,7 @@ const SignUp = (props) => {
                                 type='password'
                                 onChange={formik.handleChange}
                                 value={formik.values.repassword}></input></div>
-                            <div className='relativeInput'><button type='submit'>Sign Up</button></div>
+                                <div className='relativeInput'><button type='submit'>Sign Up</button> <button onClick={ signInHandler }>Sign In</button></div>
                         </div> :
                         isSignUpDone ?
                         <div>
